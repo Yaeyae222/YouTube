@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+</head>
+
+<body>
+
+    <button onclick="showResult('rock')">rock</button>
+
+    <button onclick="showResult('paper')">paper</button>
+
+    <button onclick="showResult('scissor')">scissor</button>
+
+    <button onclick="resetScore();">reset score</button>
+
+    <button onclick="alert(`${scores.win},${scores.lose},${scores.tie}`);">show score</button>
+
+
+
+    <script>
+        let computerMove;
+
+        let result;
+
+        let scores = {
+            win: 0,
+            lose: 0,
+            tie: 0
+        }
+
+        function resetScore() {
+            scores.win = 0;
+            scores.lose = 0;
+            scores.tie = 0;
+            alert(`${scores.win},${scores.lose},${scores.tie}`);
+
+        }
+
+        function computerPick() {
+            let randomNumber = Math.random();
+            switch (true) {
+                case randomNumber >= 0 && randomNumber <= 0.3:
+                    computerMove = 'rock';
+                    break;
+                case randomNumber > 0.3 && randomNumber <= 0.6:
+                    computerMove = 'paper';
+                    break;
+                case randomNumber > 0.6 && randomNumber <= 1:
+                    computerMove = 'scissor';
+                    break;
+            }
+        }
+
+        function showResult(playerMove) {
+            computerPick();
+            switch (true) {
+                case computerMove === 'rock' && playerMove === 'rock':
+                    result = 'Tie';
+                    break;
+                case computerMove === 'rock' && playerMove === 'paper':
+                    result = 'You Win'
+                    break;
+                case computerMove === 'rock' && playerMove === 'scissor':
+                    result = 'You Lose';
+                    break;
+
+                case computerMove === 'paper' && playerMove === 'rock':
+                    result = 'You Lose';
+                    break;
+                case computerMove === 'paper' && playerMove === 'paper':
+                    result = 'Tie';
+                    break;
+                case computerMove === 'paper' && playerMove === 'scissor':
+                    result = 'You Win';
+                    break;
+
+                case computerMove === 'scissor' && playerMove === 'rock':
+                    result = 'You Win';
+                    break;
+                case computerMove === 'scissor' && playerMove === 'paper':
+                    result = 'You Lose';
+                    break;
+                case computerMove === 'scissor' && playerMove === 'scissor':
+                    result = 'Tie';
+                    break;
+            }
+            switch (result) {
+                case 'You Win':
+                    scores.win++;
+                    break;
+                case 'You Lose':
+                    scores.lose++;
+                    break;
+                case 'Tie':
+                    scores.tie++;
+                    break;
+            }
+
+            alert(`You pick ${playerMove}.Computer pick ${computerMove}.
+${result}.
+${scores.win} , ${scores.lose} , ${scores.tie}`);
+        }
+    </script>
+
+</body>
+
+</html>
